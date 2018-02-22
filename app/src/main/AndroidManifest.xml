@@ -16,9 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DisplayMessageActivity"
-                  android:parentActivityName=".MainActivity">
-        </activity>
+        <activity
+            android:name=".DisplayNoteActivity"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".WriteNoteActivity"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

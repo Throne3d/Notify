@@ -1,6 +1,5 @@
 package io.github.throne3d.notify;
 
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,24 +10,11 @@ public class MainActivity extends AppCompatActivity {
     public static final String STARTED_SHORT_NOTE = "io.github.throne3d.notify.STARTED_SHORT_NOTE";
     public static final String NEW_NOTE = "io.github.throne3d.notify.NEW_NOTE";
 
-    public static AppDatabase db;
-    public static MainActivity instance;
-    public void setupDatabase() {
-        if (db == null) {
-            db = Room.databaseBuilder(
-                    getApplicationContext(),
-                    AppDatabase.class,
-                    "notes-db"
-            ).build();
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setupDatabase();
-        instance = this;
+        AppDatabase.getAppDatabase(this);
     }
 
     public void writeExtendedNote(View view) {

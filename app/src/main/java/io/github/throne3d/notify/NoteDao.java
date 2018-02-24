@@ -17,7 +17,7 @@ public interface NoteDao {
     List<Note> loadAllByIds(int[] noteIds);
 
     @Insert
-    void insert(Note note);
+    long insert(Note note);
 
     @Update
     void update(Note note);

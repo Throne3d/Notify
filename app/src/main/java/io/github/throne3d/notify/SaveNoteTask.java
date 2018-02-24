@@ -1,28 +1,29 @@
 package io.github.throne3d.notify;
 
 import android.os.AsyncTask;
-import android.widget.Toast;
+import android.util.Log;
 
 import java.util.ArrayList;
 
-public class SaveNoteTask extends AsyncTask<Note, Integer, ArrayList<Integer>> {
-    public AppDatabase db;
+public class SaveNoteTask extends AsyncTask<Note, Integer, ArrayList<Long>> {
+    private static final String TAG = SaveNoteTask.class.getName();
 
-    protected ArrayList<Integer> doInBackground(Note... notes) {
-        ArrayList<Integer> ids = new ArrayList();
+    protected ArrayList<Long> doInBackground(Note... notes) {
+        ArrayList<Long> ids = new ArrayList();
         for (int i=0; i < notes.length; i++) {
             Note note = notes[i];
-            db.noteDao().insert(note);
-            ids.add(note.getId());
+            long id = AppDatabase.getAppDatabase(null).noteDao().insert(note);
+            note.setId(id);
+            ids.add(id);
             publishProgress(i);
             if (isCancelled()) break;
         }
         return ids;
     }
 
-    protected void onPostExecute(ArrayList<Integer> result) {
+    protected void onPostExecute(ArrayList<Long> result) {
         // TODO: don't use a static instance of the main activity to interact with the UI?
         // TODO: investigate constant ID 0
-        Toast.makeText(MainActivity.instance.getApplicationContext(), "Saved note(s)! IDs: " + result.toString(), Toast.LENGTH_LONG).show();
+        Log.d(SaveNoteTask.TAG, "Saved note(s)! IDs: " + result.toString());
     }
 }

@@ -11,7 +11,7 @@ import java.util.Date;
 )
 public class Note {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
 
     public Note(String summary, String body) {
         setSummary(summary);
@@ -35,15 +35,14 @@ public class Note {
     public void save() {
         touch();
         SaveNoteTask saveNoteRunnable = new SaveNoteTask();
-        saveNoteRunnable.db = MainActivity.db;
         saveNoteRunnable.execute(this);
     }
 
 
-    public int getId() {
+    public long getId() {
         return id;
     }
-    public void setId(int newId) {
+    public void setId(long newId) {
         id = newId;
     }
 

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public Note saveNoteFromForm() {
         EditText editText = findViewById(R.id.writeShortEditText);
         String message = editText.getText().toString();
-        Note note = new Note("untitled", message);
+        Note note = new Note(null, message);
         note.save();
         return note;
     }

@@ -9,7 +9,7 @@ public class SaveNoteTask extends AsyncTask<Note, Integer, ArrayList<Long>> {
     private static final String TAG = SaveNoteTask.class.getName();
 
     protected ArrayList<Long> doInBackground(Note... notes) {
-        ArrayList<Long> ids = new ArrayList();
+        ArrayList<Long> ids = new ArrayList<>();
         for (int i=0; i < notes.length; i++) {
             Note note = notes[i];
             long id = AppDatabase.getAppDatabase(null).noteDao().insert(note);

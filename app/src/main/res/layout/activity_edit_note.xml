@@ -6,9 +6,25 @@
     android:layout_height="match_parent"
     tools:context="io.github.throne3d.notify.DisplayNoteActivity">
 
+    <EditText
+        android:id="@+id/noteEditSummary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/main_note_write_summary"
+        android:inputType="textMultiLine"
+        android:lines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <requestFocus />
+    </EditText>
 
     <EditText
-        android:id="@+id/noteEditText"
+        android:id="@+id/noteEditBody"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -19,5 +35,7 @@
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/noteEditSummary">
+        <requestFocus />
+    </EditText>
 </android.support.constraint.ConstraintLayout>

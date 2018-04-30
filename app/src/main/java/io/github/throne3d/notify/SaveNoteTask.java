@@ -4,26 +4,24 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class SaveNoteTask extends AsyncTask<Note, Integer, ArrayList<Long>> {
+public class SaveNoteTask extends AsyncTask<Note, Void, List<Long>> {
     private static final String TAG = SaveNoteTask.class.getName();
 
-    protected ArrayList<Long> doInBackground(Note... notes) {
-        ArrayList<Long> ids = new ArrayList<>();
-        for (int i=0; i < notes.length; i++) {
-            Note note = notes[i];
-            long id = AppDatabase.getAppDatabase(null).noteDao().insert(note);
-            note.setId(id);
-            ids.add(id);
-            publishProgress(i);
-            if (isCancelled()) break;
+    protected List<Long> doInBackground(Note... notes) {
+        Log.d(SaveNoteTask.TAG,"doInBackground started");
+        NoteDao noteDao = AppDatabase.getAppDatabase(null).noteDao();
+        List<Long> ids = noteDao.insertOrUpdateAll(notes);
+        Log.d(SaveNoteTask.TAG,"notes inserted");
+        for (int i=0; i < ids.size(); i++) {
+            notes[i].setId(ids.get(i));
         }
+        Log.d(SaveNoteTask.TAG,"returned");
         return ids;
     }
 
-    protected void onPostExecute(ArrayList<Long> result) {
-        // TODO: don't use a static instance of the main activity to interact with the UI?
-        // TODO: investigate constant ID 0
+    protected void onPostExecute(List<Long> result) {
         Log.d(SaveNoteTask.TAG, "Saved note(s)! IDs: " + result.toString());
     }
 }

@@ -32,16 +32,31 @@
         app:layout_constraintStart_toEndOf="@+id/writeShortEditText"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/writeExpandedNoteButton"
         android:layout_width="44dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="0dp"
         android:onClick="writeExtendedNote"
-        android:text="@string/main_note_expand"
+        android:src="@drawable/ic_arrow_forward_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/saveShortNoteButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/saveShortNoteButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/saveShortNoteButton" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/noteRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/writeShortEditText"
+        tools:listitem="@layout/recyclerview_note_item" />
 </android.support.constraint.ConstraintLayout>

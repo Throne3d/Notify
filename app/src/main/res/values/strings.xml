@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Notify</string>
+    <string name="main_note_write_summary">Summary…</string>
     <string name="main_note_write">Write a note…</string>
-    <string name="main_note_save">Save</string>
-    <string name="main_note_expand">…</string>
+    <string name="main_note_save">OK</string>
+    <string name="main_note_expand">→</string>
 </resources>

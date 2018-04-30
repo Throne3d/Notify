@@ -1,5 +1,6 @@
 package io.github.throne3d.notify;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -17,25 +18,21 @@ public class Note {
         setSummary(summary);
         setBody(body);
 
-        createdAt = new Date();
-        updatedAt = createdAt;
+        Date now = new Date();
+        setCreatedAt(now);
+        setUpdatedAt(now);
     }
 
     private String summary;
     private String body;
 
+    @ColumnInfo(name = "created_at")
     private Date createdAt;
+    @ColumnInfo(name = "updated_at")
     private Date updatedAt;
 
-
     public void touch() {
-        updatedAt = new Date();
-    }
-
-    public void save() {
-        touch();
-        SaveNoteTask saveNoteRunnable = new SaveNoteTask();
-        saveNoteRunnable.execute(this);
+        setUpdatedAt(new Date());
     }
 
 
@@ -71,5 +68,10 @@ public class Note {
     }
     public void setUpdatedAt(Date newUpdatedAt) {
         updatedAt = newUpdatedAt;
+    }
+
+    public void save() {
+        SaveNoteTask saveNoteRunnable = new SaveNoteTask();
+        saveNoteRunnable.execute(this);
     }
 }
